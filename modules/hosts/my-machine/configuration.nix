@@ -82,6 +82,9 @@
       wl-clipboard
       # Grabar pantalla
       kooha
+      # Contraseñas
+      # Gestor de contraseñas
+      keepassxc
 
       # -----------------
       # --- COMMANDOS ---
