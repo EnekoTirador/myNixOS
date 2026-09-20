@@ -82,9 +82,12 @@
       wl-clipboard
       # Grabar pantalla
       kooha
-      # Contraseñas
       # Gestor de contraseñas
       keepassxc
+      # Sonidos ambientales
+      blanket
+      # Compartir archivos en red local
+      localsend
 
       # -----------------
       # --- COMMANDOS ---
