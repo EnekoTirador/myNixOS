@@ -22,6 +22,9 @@
 
 
     environment.systemPackages = with pkgs; [
+      # ------------
+      # --- APPS ---
+      # ------------
       # Navegador
       firefox
       # Texto
@@ -43,6 +46,8 @@
       })
       # Gestor de archivos
       nautilus
+      # Gestor de tareas
+      planify
       # Automontar pendrives
       udiskie
       # Reproductor multimedia
@@ -77,6 +82,17 @@
       wl-clipboard
       # Grabar pantalla
       kooha
+
+      # -----------------
+      # --- COMMANDOS ---
+      # -----------------
+      # Ver files en formato tree
+      tree
+      # Descargar archivos
+      wget
+      curl
+      # Visualizar archivos de programacion
+      bat
     ];
 
     services.upower.enable = true;
