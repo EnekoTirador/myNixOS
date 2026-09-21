@@ -31,6 +31,8 @@
       brightnessctl
       # Texto
       vim
+      # Programar
+      vscode
       # Git
       git
       # Fuente
