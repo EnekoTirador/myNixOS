@@ -87,8 +87,12 @@
                   "Mod+Ctrl+WheelScrollDown".focus-workspace-down = [];
                   "Mod+Ctrl+WheelScrollUp".focus-workspace-up = [];
 
+                  "XF86AudioMute".spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
 	            "XF86AudioRaiseVolume".spawn-sh = "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+";
                   "XF86AudioLowerVolume".spawn-sh = "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-";
+
+                  "XF86MonBrightnessDown".spawn-sh = "brightnessctl set 5%-";
+                  "XF86MonBrightnessUp".spawn-sh = "brightnessctl set 5%+";
 
                   # Captura de pantalla completa
                   "Print".spawn-sh = "grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy";

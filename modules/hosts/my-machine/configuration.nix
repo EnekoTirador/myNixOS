@@ -27,6 +27,8 @@
       # ------------
       # Navegador
       firefox
+      # Control brillo
+      brightnessctl
       # Texto
       vim
       neovim # AstroNvim
