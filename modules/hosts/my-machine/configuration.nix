@@ -31,14 +31,11 @@
       brightnessctl
       # Texto
       vim
-      neovim # AstroNvim
+      # Git
       git
-      ripgrep
-      fd
-      unzip
-      nodejs
-      lazygit
+      # Fuente
       nerd-fonts.jetbrains-mono
+      # Programas en C/C++
       gcc
       # Tema de SDDM
       (catppuccin-sddm.override {
@@ -101,6 +98,10 @@
       curl
       # Visualizar archivos de programacion
       bat
+      # Unzip
+      unzip
+      # Busqueda de texto en archivos
+      ripgrep
     ];
 
     services.upower.enable = true;
