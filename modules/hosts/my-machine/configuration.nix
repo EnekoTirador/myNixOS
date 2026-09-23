@@ -35,6 +35,8 @@
       vscode
       # Git
       git
+      # Menú git en la terminal
+      lazygit
       # Fuente
       nerd-fonts.jetbrains-mono
       # Programas en C/C++
