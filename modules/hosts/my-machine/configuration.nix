@@ -45,6 +45,8 @@
         font = "JetBrainsMono Nerd Font";
         fontSize = "10";
       })
+      # Tema cursor
+      catppuccin-cursors.mochaMauve
       # Gestor de archivos
       nautilus
       # Gestor de tareas
@@ -61,7 +63,7 @@
       slurp
       # Anotar capturas
       swappy
-      # Mensajería
+      # Discord 
       vesktop
       # Monitor de sistema
       btop

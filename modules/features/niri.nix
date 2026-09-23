@@ -26,6 +26,14 @@
                         click-method = "clickfinger";
                   };
 	      };
+	      cursor = {
+  		xcursor-theme = "catppuccin-mocha-mauve-cursors";
+		xcursor-size = 24;
+	      };
+	      environment = {
+    		XCURSOR_THEME = "catppuccin-mocha-mauve-cursors";
+    		XCURSOR_SIZE = "24";
+  	      };
 
 	      layout.gaps = 5;
 	    
