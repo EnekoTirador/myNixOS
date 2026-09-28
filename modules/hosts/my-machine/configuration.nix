@@ -1,12 +1,15 @@
 { self, inputs, ... }: {
   flake.nixosModules.myMachineConfiguration = { pkgs, lib, ... }: {
-    imports =
-    [ # Include the results of the hardware scan.
+    imports = [
+      # Include the results of the hardware scan.
       self.nixosModules.myMachineHardware
       self.nixosModules.niri
     ];
-    
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     programs.nix-ld.enable = true;
     # Servicio para nautilus
     services.gvfs.enable = true;
@@ -31,16 +34,8 @@
       # Texto
       vim
       # Programar
-      neovim
-      # Tree-Sitter
-      tree-sitter
-      # LSP
-      python3
-      pyright
-      bash-language-server
-      shellcheck
-      lua-language-server
-      nil
+      vscode
+      # C/C++ Compiler
       gcc
       # Git
       git
@@ -72,7 +67,7 @@
       slurp
       # Anotar capturas
       swappy
-      # Discord 
+      # Discord
       vesktop
       # Monitor de sistema
       btop
@@ -153,10 +148,13 @@
     users.users."eko" = {
       isNormalUser = true;
       description = "Eneko Tirador";
-      extraGroups = [ "networkmanager" "wheel" "docker" ];
-      packages = with pkgs; [];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+      ];
+      packages = with pkgs; [ ];
     };
-
 
     nixpkgs.config.allowUnfree = true;
 
