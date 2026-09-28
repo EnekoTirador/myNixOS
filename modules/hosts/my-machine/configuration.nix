@@ -20,7 +20,6 @@
       package = pkgs.kdePackages.sddm;
     };
 
-
     environment.systemPackages = with pkgs; [
       # ------------
       # --- APPS ---
@@ -32,15 +31,23 @@
       # Texto
       vim
       # Programar
-      vscode
+      neovim
+      # Tree-Sitter
+      tree-sitter
+      # LSP
+      python3
+      pyright
+      bash-language-server
+      shellcheck
+      lua-language-server
+      nil
+      gcc
       # Git
       git
       # Menú git en la terminal
       lazygit
       # Fuente
       nerd-fonts.jetbrains-mono
-      # Programas en C/C++
-      gcc
       # Tema de SDDM
       (catppuccin-sddm.override {
         flavor = "mocha";
