@@ -1,163 +1,41 @@
-{ self, inputs, ... }: {
-  flake.nixosModules.myMachineConfiguration = { pkgs, lib, ... }: {
+{ self, ... }: {
+  flake.nixosModules.myMachineConfiguration = { ... }: {
     imports = [
-      # Include the results of the hardware scan.
+      # Hardware de esta máquina
       self.nixosModules.myMachineHardware
+
+      # Núcleo del sistema
+      self.nixosModules.core-nix
+      self.nixosModules.core-boot
+      self.nixosModules.core-locale
+      self.nixosModules.core-network
+
+      # Escritorio
       self.nixosModules.niri
+      self.nixosModules.desktop-sddm
+      self.nixosModules.desktop-theming
+      self.nixosModules.desktop-filesystems
+
+      # Servicios
+      self.nixosModules.service-docker
+
+      # Usuario
+      self.nixosModules.user-eko
+
+      # Apps, por categoría
+      self.nixosModules.apps-browsers
+      self.nixosModules.apps-terminal
+      self.nixosModules.apps-dev
+      self.nixosModules.apps-media
+      self.nixosModules.apps-productivity
+      self.nixosModules.apps-communication
+      self.nixosModules.apps-network
+      self.nixosModules.apps-system-tools
+      self.nixosModules.apps-cli-tools
     ];
 
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    programs.nix-ld.enable = true;
-    # Servicio para nautilus
-    services.gvfs.enable = true;
-    # Servicio necesario para Docker
-    virtualisation.docker.enable = true;
-    # Añadir SDDM para el Log-In
-    services.displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "catppuccin-mocha-mauve";
-      package = pkgs.kdePackages.sddm;
-    };
-
-    environment.systemPackages = with pkgs; [
-      # ------------
-      # --- APPS ---
-      # ------------
-      # Navegador
-      firefox
-      # Control brillo
-      brightnessctl
-      # Texto
-      vim
-      # Programar
-      vscode
-      # C/C++ Compiler
-      gcc
-      # Git
-      git
-      # Menú git en la terminal
-      lazygit
-      # Fuente
-      nerd-fonts.jetbrains-mono
-      # Tema de SDDM
-      (catppuccin-sddm.override {
-        flavor = "mocha";
-        font = "JetBrainsMono Nerd Font";
-        fontSize = "10";
-      })
-      # Tema cursor
-      catppuccin-cursors.mochaMauve
-      # Gestor de archivos
-      nautilus
-      # Gestor de tareas
-      planify
-      # Automontar pendrives
-      udiskie
-      # Reproductor multimedia
-      mpv
-      # Visor de imágenes
-      imv
-      # Captura de pantalla
-      grim
-      # Selección de área
-      slurp
-      # Anotar capturas
-      swappy
-      # Discord
-      vesktop
-      # Monitor de sistema
-      btop
-      # Compresión de archivos
-      p7zip
-      # Bloqueo de pantalla
-      swaylock-effects
-      # Lector de PDF
-      zathura
-      # Suite ofimática
-      libreoffice
-      # Cliente torrent
-      qbittorrent
-      # Contenedores
-      docker
-      # Info del sistema
-      fastfetch
-      # Portapapeles Wayland
-      wl-clipboard
-      # Grabar pantalla
-      kooha
-      # Gestor de contraseñas
-      keepassxc
-      # Sonidos ambientales
-      blanket
-      # Compartir archivos en red local
-      localsend
-
-      # -----------------
-      # --- COMMANDOS ---
-      # -----------------
-      # Ver files en formato tree
-      tree
-      # Descargar archivos
-      wget
-      curl
-      # Visualizar archivos de programacion
-      bat
-      # Unzip
-      unzip
-      # Busqueda de texto en archivos
-      ripgrep
-    ];
-
-    services.upower.enable = true;
-
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-
-    boot.kernelPackages = pkgs.linuxPackages_latest;
-
-    networking.hostName = "EkoPortatil"; # Define your hostname.
-    networking.networkmanager.enable = true;
-
-    time.timeZone = "Europe/Madrid";
-
-    i18n.defaultLocale = "en_US.UTF-8";
-
-    i18n.extraLocaleSettings = {
-      LC_ADDRESS = "es_ES.UTF-8";
-      LC_IDENTIFICATION = "es_ES.UTF-8";
-      LC_MEASUREMENT = "es_ES.UTF-8";
-      LC_MONETARY = "es_ES.UTF-8";
-      LC_NAME = "es_ES.UTF-8";
-      LC_NUMERIC = "es_ES.UTF-8";
-      LC_PAPER = "es_ES.UTF-8";
-      LC_TELEPHONE = "es_ES.UTF-8";
-      LC_TIME = "es_ES.UTF-8";
-    };
-
-    services.xserver.xkb = {
-      layout = "es";
-      variant = "";
-    };
-
-    console.keyMap = "es";
-
-    users.users."eko" = {
-      isNormalUser = true;
-      description = "Eneko Tirador";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "docker"
-      ];
-      packages = with pkgs; [ ];
-    };
-
-    nixpkgs.config.allowUnfree = true;
-
+    # Lo único realmente específico de este portátil
+    networking.hostName = "EkoPortatil";
     system.stateVersion = "26.05";
   };
 }
