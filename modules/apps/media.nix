@@ -6,7 +6,7 @@
       # Visor de imágenes
       imv
       # Grabar pantalla
-      kooha
+      obs-studio
       # Sonidos ambientales
       blanket
     ];
