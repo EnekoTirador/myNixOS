@@ -5,15 +5,18 @@
     services.displayManager.sddm = {
       enable = true;
       wayland.enable = false;
-      theme = "catppuccin-mocha-mauve";
+      theme = "sddm-astronaut-theme";
       package = pkgs.kdePackages.sddm;
+      extraPackages = [
+        (pkgs.sddm-astronaut.override {
+          embeddedTheme = "black_hole";
+        })
+      ];
     };
 
     environment.systemPackages = with pkgs; [
-      (catppuccin-sddm.override {
-        flavor = "mocha";
-        font = "JetBrainsMono Nerd Font";
-        fontSize = "10";
+      (sddm-astronaut.override {
+        embeddedTheme = "black_hole";
       })
     ];
   };

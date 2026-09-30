@@ -12,6 +12,10 @@
       unzip
       # Búsqueda de texto en archivos
       ripgrep
+      # Búsqueda de archivos
+      fd
+      # Buscador difuso
+      fzf
     ];
   };
 }
