@@ -35,7 +35,13 @@
     		XCURSOR_SIZE = "24";
   	      };
 
-	      layout.gaps = 5;
+          layout = {
+            gaps = 12;
+            focus-ring = {
+                width = 2;
+                active-color = "#89b4fa";
+            };
+          };
 	    
 	      binds = {
 	            "Mod+S".spawn-sh =
