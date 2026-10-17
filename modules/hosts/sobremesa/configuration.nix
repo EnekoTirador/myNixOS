@@ -19,6 +19,7 @@
 
       # Servicios
       self.nixosModules.service-docker
+      self.nixosModules.service-virtualisation
 
       # Usuario
       self.nixosModules.user-eko
@@ -43,6 +44,11 @@
     fileSystems."/mnt/juegos" = {
       device = "/dev/disk/by-uuid/d00b3179-d9ea-435b-8d2b-5a0dccddeb0f";
       fsType = "btrfs";
+      options = [ "nofail" ];
+    };
+    fileSystems."/mnt/vms" = {
+      device = "/dev/disk/by-uuid/e3c9415c-b5aa-43a9-971f-2a4615489fcc";
+      fsType = "ext4";
       options = [ "nofail" ];
     };
     system.stateVersion = "26.05";

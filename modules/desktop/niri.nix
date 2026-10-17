@@ -141,6 +141,7 @@
                   "Print".spawn-sh = "grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy";
                   # Captura de un área seleccionada
                   "Shift+Print".spawn-sh = "/home/eko/.local/bin/screenshot-clipboard.sh";
+                  "Mod+Ctrl+S".spawn-sh = "/home/eko/.local/bin/screenshot-clipboard.sh";
                   # Captura de área + anotar con swappy
                   "Ctrl+Print".spawn-sh = "grim -g \"$(slurp)\" - | swappy -f -";
 
