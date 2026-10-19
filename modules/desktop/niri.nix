@@ -35,6 +35,8 @@
     		XCURSOR_SIZE = "24";
   	      };
 
+          hotkey-overlay.skip-at-startup = [];
+
           layout = {
             gaps = 12;
             focus-ring = {
