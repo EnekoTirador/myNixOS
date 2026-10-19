@@ -13,6 +13,8 @@
       xwayland-satellite
       # Overlay con FPS, temperaturas y uso de GPU
       mangohud
+      # Audio
+      pulseaudio
     ];
   };
 }
