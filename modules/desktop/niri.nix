@@ -44,6 +44,23 @@
                 active-color = "#89b4fa";
             };
           };
+          outputs = {
+          "HDMI-A-1" = {
+            mode = "1920x1080@60.000";
+            scale = 1;
+            position = _: { props = { x = 0; y = 0; }; };
+          };
+          "DP-2" = {
+            mode = "1920x1080@180.003";
+            scale = 1;
+            position = _: { props = { x = 1920; y = 0; }; };
+          };
+          "DP-3" = {
+            mode = "1920x1080@179.998";
+            scale = 1;
+            position = _: { props = { x = 3840; y = 0; }; };
+          };
+          };
 	    
 	      binds = {
 	            "Mod+S".spawn-sh =
@@ -93,6 +110,18 @@
                   "Mod+Shift+9".move-column-to-workspace = 9;
                   "Mod+Shift+0".move-column-to-workspace = 10;
 
+		  # Cambiar el foco de monitor
+		"Mod+Shift+Left".focus-monitor-left = [];
+		"Mod+Shift+Right".focus-monitor-right = [];
+		
+		# Mover la columna entera a otro monitor
+		"Mod+Shift+Ctrl+Left".move-column-to-monitor-left = [];
+		"Mod+Shift+Ctrl+Right".move-column-to-monitor-right = [];
+		
+		# Mover solo la ventana enfocada a otro monitor
+		"Mod+Alt+Left".move-window-to-monitor-left = [];
+		"Mod+Alt+Right".move-window-to-monitor-right = [];
+
 	            "Mod+Ctrl+H".set-column-width = "-5%";
                   "Mod+Ctrl+L".set-column-width = "+5%";
                   "Mod+Ctrl+J".set-window-height = "-5%";
@@ -114,6 +143,7 @@
                   "Print".spawn-sh = "grim ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy";
                   # Captura de un área seleccionada
                   "Shift+Print".spawn-sh = "/home/eko/.local/bin/screenshot-clipboard.sh";
+                  "Mod+Ctrl+S".spawn-sh = "/home/eko/.local/bin/screenshot-clipboard.sh";
                   # Captura de área + anotar con swappy
                   "Ctrl+Print".spawn-sh = "grim -g \"$(slurp)\" - | swappy -f -";
 

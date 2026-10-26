@@ -16,6 +16,8 @@
       fd
       # Buscador difuso
       fzf
+      # Visualizar .md
+      glow
     ];
   };
 }
