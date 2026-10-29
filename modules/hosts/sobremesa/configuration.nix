@@ -51,6 +51,14 @@
       fsType = "ext4";
       options = [ "nofail" ];
     };
+
+    # Orden de los monitores en la pantalla de login
+    services.xserver.displayManager.setupCommands = ''
+      ${pkgs.xrandr}/bin/xrandr \
+        --output HDMI-0 --mode 1920x1080 --pos 0x0 \
+        --output DP-2 --primary --mode 1920x1080 --pos 1920x0 \
+        --output DP-4 --mode 1920x1080 --pos 3840x0
+    '';
     system.stateVersion = "26.05";
   };
 }
