@@ -18,6 +18,8 @@
       fzf
       # Visualizar .md
       glow
+      # Paquete para el killall
+      psmisc
     ];
   };
 }
