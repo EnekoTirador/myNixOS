@@ -42,7 +42,7 @@ wallpaper_placement      = "floating"
 [shell.launcher]
 layout          = "full"
 width           = 820
-default_view    = "recent"
+default_view    = "all"
 show_icons      = true
 sort_by_usage   = true
 pinned          = ["firefox", "kitty", "steam", "virt-manager"]
@@ -123,15 +123,15 @@ gpu_poll_seconds = 2.0
 [bar.main]
 position           = "top"
 thickness          = 38
-background_opacity = 0.82
-compositor_blur    = true
+background_opacity = 0.0
+compositor_blur    = false
 radius             = 16
 margin_edge        = 8
 margin_ends        = 12        # casi de borde a borde; los gaps de Niri son 12
 padding            = 10
 widget_spacing     = 8
 font_scale         = 1.0
-shadow             = true
+shadow             = false
 reserve_space      = true
 capsule            = true
 capsule_fill       = "surface_container"
@@ -140,7 +140,7 @@ capsule_padding    = 8
 
 start  = ["launcher", "workspaces", "active_window"]
 center = ["group:clock"]
-end    = ["media", "audio_visualizer", "group:stats", "tray", "group:quick", "notifications", "control-center", "session"]
+end    = ["media", "audio_visualizer", "group:stats", "tray", "group:quick", "notifications", "battery", "control-center", "session"]
 
 # Reloj + fecha en una sola cápsula
 [[bar.main.capsule_group]]
@@ -162,7 +162,7 @@ widget_spacing      = 10
 # Ajustes rápidos: el volumen siempre visible, red/bluetooth/portapapeles al pasar
 [[bar.main.capsule_group]]
 id                  = "quick"
-members             = ["volume", "network", "bluetooth", "clipboard", "battery"]
+members             = ["volume", "network", "bluetooth", "clipboard"]
 accordion           = true
 accordion_direction = "start"
 widget_spacing      = 10
@@ -197,7 +197,6 @@ active_pill_size      = 2.6
 [widget.active_window]
 max_length   = 320
 title_scroll = "on_hover"
-capsule      = false
 
 [widget.clock]
 format         = "{:%H:%M}"
