@@ -233,7 +233,7 @@ clone_repos(){
 }
 KITTY_DONE=0; VIM_DONE=0
 
-# ---------- dotfiles (resto: swaylock, fastfetch, yazi, capturas) ----------
+# ---------- dotfiles (resto: fastfetch, yazi, capturas) ----------
 cp_safe(){ # cp_safe origen destino
   [ -e "$1" ] || { warn "No existe $1 (¿subiste dotfiles/ al repo?)"; return; }
   mkdir -p "$(dirname "$2")"
@@ -259,12 +259,11 @@ SH
 }
 install_dotfiles(){
   [ $DO_DOTS = 1 ] || return 0
-  confirm "¿Instalar el resto de dotfiles (swaylock, fastfetch, yazi, script de capturas)?" s || { install_vim_plugins; return 0; }
+  confirm "¿Instalar el resto de dotfiles (fastfetch, yazi, script de capturas)?" s || { install_vim_plugins; return 0; }
   info "Copiando dotfiles (backup .bak si ya existían)"
   if [ -d dotfiles ]; then
     # kitty y vim solo si no se clonaron de GitHub
     [ $KITTY_DONE = 1 ] || cp_safe dotfiles/kitty/kitty.conf "$HOME/.config/kitty/kitty.conf"
-    cp_safe dotfiles/swaylock/config        "$HOME/.config/swaylock/config"
     cp_safe dotfiles/fastfetch/config.jsonc "$HOME/.config/fastfetch/config.jsonc"
     cp_safe dotfiles/yazi/keymap.toml       "$HOME/.config/yazi/keymap.toml"
     if [ $VIM_DONE = 0 ]; then

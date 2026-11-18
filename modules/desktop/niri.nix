@@ -148,7 +148,7 @@
           # Captura de área + anotar con swappy
           "Ctrl+Print".spawn-sh = "grim -g \"$(slurp)\" - | swappy -f -";
 
-          "Mod+X".spawn-sh = "swaylock";
+          "Mod+X".spawn-sh = "${lib.getExe self'.packages.myNoctalia} msg session lock";
         };
       };
     };

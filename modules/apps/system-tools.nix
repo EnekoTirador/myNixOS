@@ -12,7 +12,6 @@
       # Anotar capturas
       swappy
       # Bloqueo de pantalla
-      swaylock-effects
       # Monitor de sistema
       btop
       # Info del sistema
