@@ -1,0 +1,264 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  Noctalia v5 · myNixOS (sobremesa + myMachine)
+#  Barra flotante tipo "isla", grupos en cápsula que se despliegan al pasar
+#  el ratón, monitor de sistema con GPU (RTX 4060) y visualizador de audio.
+#
+#  Sobremesa (nombres de Niri):
+#    HDMI-A-1 izquierda · DP-2 centro (barra completa) · DP-3 derecha
+#  El portátil (eDP-1) no casa con ninguna regla de monitor y usa la barra completa.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Shell ────────────────────────────────────────────────────────────────────
+
+[shell]
+font_family         = "JetBrainsMono Nerd Font"
+corner_radius_scale = 1.3
+time_format         = "{:%H:%M}"
+date_format         = "%A, %B %d"
+lang                = "en"
+telemetry_enabled   = false
+niri_overview_type_to_launch_enabled = true   # en el overview de Niri, escribir lanza apps
+
+[shell.animation]
+enabled = true
+speed   = 1.15
+
+[shell.shadow]
+direction = "down"
+alpha     = 0.45
+
+[shell.panel]
+transparency_mode        = "glass"
+borders                  = true
+border_color             = "outline_variant"
+shadow                   = true
+launcher_placement       = "floating"
+launcher_position        = "center"
+clipboard_placement      = "floating"
+control_center_placement = "floating"
+session_placement        = "floating"
+wallpaper_placement      = "floating"
+
+[shell.launcher]
+layout          = "full"
+width           = 820
+default_view    = "recent"
+show_icons      = true
+sort_by_usage   = true
+pinned          = ["firefox", "kitty", "steam", "virt-manager"]
+
+[shell.window_switcher]
+style        = "carousel"
+mru          = true
+show_caption = true
+
+# ── Tema ─────────────────────────────────────────────────────────────────────
+# Colores generados a partir del fondo de pantalla (cambian al cambiar de fondo).
+# Otros esquemas: m3-tonal-spot | m3-content | m3-fruit-salad | m3-rainbow |
+#                 m3-monochrome | vibrant | faithful | muted
+
+[theme]
+mode            = "dark"
+source          = "wallpaper"
+wallpaper_scheme = "m3-content"
+pure_black_dark = false
+
+# ── Fondo de pantalla ────────────────────────────────────────────────────────
+
+[wallpaper]
+enabled               = true
+fill_mode             = "crop"
+transition            = ["fade", "disc", "honeycomb", "vortex", "pixel"]
+transition_duration   = 1200
+edge_smoothness       = 0.4
+sync_transitions      = true
+directory             = ""             # vacío = tu carpeta de Imágenes (XDG Pictures)
+
+[wallpaper.automation]
+enabled          = false        # ponlo a true para cambiar de fondo solo
+interval_seconds = 1800
+order            = "random"
+
+# ── Notificaciones y OSD ─────────────────────────────────────────────────────
+
+[notification]
+enable_daemon         = true
+group_by_app          = true
+background_opacity    = 0.92
+border                = true
+border_color          = "primary"
+follow_focused_output = true
+offset_x              = 16
+offset_y              = 12
+
+[osd]
+position              = "bottom_center"
+background_opacity    = 0.92
+border                = true
+border_color          = "primary"
+follow_focused_output = true
+
+[osd.kinds]
+lock_keys = false
+
+# ── Pantalla de bloqueo ──────────────────────────────────────────────────────
+
+[lockscreen]
+enabled             = true
+blurred_desktop     = true
+transition          = ["disc", "honeycomb"]
+transition_duration = 900
+blur_intensity      = 0.7
+tint_intensity      = 0.35
+
+# ── Monitor de sistema ───────────────────────────────────────────────────────
+
+[system.monitor]
+enabled          = true
+cpu_poll_seconds = 2.0
+gpu_poll_seconds = 2.0
+
+# ── Barra ────────────────────────────────────────────────────────────────────
+
+[bar.main]
+position           = "top"
+thickness          = 38
+background_opacity = 0.82
+compositor_blur    = true
+radius             = 16
+margin_edge        = 8
+margin_ends        = 12        # casi de borde a borde; los gaps de Niri son 12
+padding            = 10
+widget_spacing     = 8
+font_scale         = 1.0
+shadow             = true
+reserve_space      = true
+capsule            = true
+capsule_fill       = "surface_container"
+capsule_opacity    = 0.9
+capsule_padding    = 8
+
+start  = ["launcher", "workspaces", "active_window"]
+center = ["group:clock"]
+end    = ["media", "audio_visualizer", "group:stats", "tray", "group:quick", "notifications", "control-center", "session"]
+
+# Reloj + fecha en una sola cápsula
+[[bar.main.capsule_group]]
+id             = "clock"
+members        = ["clock", "date"]
+fill           = "primary_container"
+foreground     = "on_primary_container"
+widget_spacing = 10
+
+# Monitor de sistema: muestra la CPU y, al pasar el ratón, despliega GPU y RAM
+[[bar.main.capsule_group]]
+id                  = "stats"
+members             = ["cpu", "cpu_temp", "gpu", "gpu_temp", "ram"]
+accordion           = true
+accordion_direction = "end"
+accordion_duration  = 220
+widget_spacing      = 10
+
+# Ajustes rápidos: el volumen siempre visible, red/bluetooth/portapapeles al pasar
+[[bar.main.capsule_group]]
+id                  = "quick"
+members             = ["volume", "network", "bluetooth", "clipboard", "battery"]
+accordion           = true
+accordion_direction = "start"
+widget_spacing      = 10
+
+# Monitores laterales del sobremesa: barra mínima
+[bar.main.monitor.izquierda]
+match  = "HDMI-A-1"
+start  = ["workspaces"]
+center = ["active_window"]
+end    = ["clock"]
+
+[bar.main.monitor.derecha]
+match  = "DP-3"
+start  = ["workspaces"]
+center = ["active_window"]
+end    = ["clock"]
+
+# ── Widgets ──────────────────────────────────────────────────────────────────
+
+[widget.launcher]
+capsule_fill       = "primary"
+capsule_foreground = "on_primary"
+
+[widget.workspaces]
+style                 = "focus_hint"
+show_icons            = true
+focused_color         = "primary"
+occupied_color        = "secondary"
+empty_color           = "outline_variant"
+active_pill_size      = 2.6
+
+[widget.active_window]
+max_length   = 320
+title_scroll = "on_hover"
+capsule      = false
+
+[widget.clock]
+format         = "{:%H:%M}"
+tooltip_format = "{:%A, %B %d, %Y}"
+font_weight    = 700
+
+[widget.date]
+format = "{:%a %d %b}"
+
+[widget.media]
+max_length   = 240
+title_scroll = "on_hover"
+
+[widget.audio_visualizer]
+width     = 64
+bands     = 18
+mirrored  = true
+centered  = true
+color_1   = "primary"
+color_2   = "tertiary"
+capsule   = false
+
+[widget.cpu]
+type            = "sysmon"
+stat            = "cpu_usage"
+visualization   = "graph"
+label_min_width = 34
+
+[widget.cpu_temp]
+type            = "sysmon"
+stat            = "cpu_temp"
+visualization   = "none"
+label_min_width = 38
+
+[widget.gpu]
+type            = "sysmon"
+stat            = "gpu_usage"
+visualization   = "graph"
+label_min_width = 34
+
+[widget.gpu_temp]
+type            = "sysmon"
+stat            = "gpu_temp"
+visualization   = "none"
+label_min_width = 38
+
+[widget.ram]
+type            = "sysmon"
+stat            = "ram_used"
+visualization   = "gauge"
+label_min_width = 58
+
+[widget.notifications]
+hide_when_no_unread = false
+
+[widget.tray]
+drawer = true
+
+[widget.network]
+show_label = false
+
+[widget.session]
+capsule_fill       = "error_container"
+capsule_foreground = "on_error_container"

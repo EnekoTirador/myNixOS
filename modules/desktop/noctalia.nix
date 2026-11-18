@@ -4,7 +4,7 @@
 
     packages.myNoctalia = inputs.wrapper-modules.wrappers.noctalia.wrap {
       inherit pkgs;
-      settings = { };
+      settings = builtins.fromTOML (builtins.readFile ./noctalia.toml);
     };
   };
 }
