@@ -24,6 +24,10 @@
       # Usuario
       self.nixosModules.user-eko
 
+      # Home Manager (config de /home/eko)
+      self.nixosModules.home-manager
+      self.nixosModules.home-eko
+
       # Apps, por categoría
       self.nixosModules.apps-browsers
       self.nixosModules.apps-terminal

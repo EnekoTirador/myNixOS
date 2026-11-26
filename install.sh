@@ -156,6 +156,8 @@ ${nv}      self.nixosModules.core-nix
       self.nixosModules.desktop-filesystems
       self.nixosModules.service-docker
       self.nixosModules.user-eko
+      self.nixosModules.home-manager
+      self.nixosModules.home-eko
       self.nixosModules.apps-browsers
       self.nixosModules.apps-terminal
       self.nixosModules.apps-dev
