@@ -200,8 +200,7 @@ build_and_apply(){
   esac
 }
 
-# ---------- repos de GitHub (kitty y vim) ----------
-KITTY_REPO="https://github.com/EnekoTirador/Kitty"
+# ---------- repos de GitHub (vim; kitty lo gestiona Home Manager) ----------
 VIM_REPO="https://github.com/EnekoTirador/Vim"
 REPOS_CLONED=0
 
@@ -220,9 +219,9 @@ clone_repo(){ # clone_repo URL DESTINO
 }
 clone_repos(){
   [ $DO_DOTS = 1 ] || return 0
-  confirm "¿Clonar tus repos de Kitty y Vim desde GitHub?" s || return 0
-  local k=0 v=0
-  clone_repo "$KITTY_REPO" "$HOME/.config/kitty" && k=1
+  # Kitty ya NO se clona: lo gestiona Home Manager (modules/home/kitty.nix)
+  confirm "¿Clonar tu repo de Vim desde GitHub?" s || return 0
+  local k=1 v=0
   clone_repo "$VIM_REPO"   "$HOME/.vim"          && v=1
   [ $k = 1 ] && [ $v = 1 ] && REPOS_CLONED=1
   # Si el repo de vim trae un .vimrc en la raíz, vim lo necesita en ~/.vimrc
@@ -233,7 +232,7 @@ clone_repos(){
   [ $k = 1 ] && KITTY_DONE=1 || KITTY_DONE=0
   [ $v = 1 ] && VIM_DONE=1 || VIM_DONE=0
 }
-KITTY_DONE=0; VIM_DONE=0
+KITTY_DONE=1; VIM_DONE=0
 
 # ---------- dotfiles (resto: fastfetch, yazi, capturas) ----------
 cp_safe(){ # cp_safe origen destino
