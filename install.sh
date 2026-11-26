@@ -234,47 +234,12 @@ clone_repos(){
 }
 KITTY_DONE=1; VIM_DONE=0
 
-# ---------- dotfiles (resto: fastfetch, yazi, capturas) ----------
-cp_safe(){ # cp_safe origen destino
-  [ -e "$1" ] || { warn "No existe $1 (¿subiste dotfiles/ al repo?)"; return; }
-  mkdir -p "$(dirname "$2")"
-  [ -e "$2" ] && [ ! -L "$2" ] && cp -a "$2" "$2.bak"
-  cp -a "$1" "$2"; ok "$2"
-}
-screenshot_script(){
-  local dst="$HOME/.local/bin/screenshot-clipboard.sh"
-  mkdir -p "$HOME/.local/bin" "$HOME/Pictures/Screenshots"
-  if [ -f dotfiles/bin/screenshot-clipboard.sh ]; then
-    cp_safe dotfiles/bin/screenshot-clipboard.sh "$dst"
-  elif [ ! -e "$dst" ]; then
-    cat > "$dst" <<'SH'
-#!/usr/bin/env bash
-# Captura de una zona: copia al portapapeles y guarda en Pictures/Screenshots
-f="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png"
-area="$(slurp)" || exit 0
-grim -g "$area" - | tee "$f" | wl-copy
-SH
-    ok "$dst creado (versión mínima)"
-  fi
-  chmod +x "$dst" 2>/dev/null || true
-}
+# ---------- dotfiles ----------
+# kitty, zsh, starship, git, fastfetch y el script de capturas los gestiona
+# Home Manager (modules/home/*.nix): se aplican solos con nixos-rebuild.
 install_dotfiles(){
   [ $DO_DOTS = 1 ] || return 0
-  confirm "¿Instalar el resto de dotfiles (fastfetch, yazi, script de capturas)?" s || { install_vim_plugins; return 0; }
-  info "Copiando dotfiles (backup .bak si ya existían)"
-  if [ -d dotfiles ]; then
-    # kitty y vim solo si no se clonaron de GitHub
-    [ $KITTY_DONE = 1 ] || cp_safe dotfiles/kitty/kitty.conf "$HOME/.config/kitty/kitty.conf"
-    cp_safe dotfiles/fastfetch/config.jsonc "$HOME/.config/fastfetch/config.jsonc"
-    cp_safe dotfiles/yazi/keymap.toml       "$HOME/.config/yazi/keymap.toml"
-    if [ $VIM_DONE = 0 ]; then
-      cp_safe dotfiles/vim/.vimrc "$HOME/.vimrc"
-      [ -d dotfiles/vim/.vim ] && { mkdir -p "$HOME/.vim"; cp -a dotfiles/vim/.vim/. "$HOME/.vim/"; ok "$HOME/.vim"; }
-    fi
-  else
-    warn "No hay carpeta dotfiles/ en el repo; solo se hace lo de kitty/vim por GitHub y el script de capturas."
-  fi
-  screenshot_script
+  mkdir -p "$HOME/Pictures/Screenshots"
   install_vim_plugins
 }
 install_vim_plugins(){

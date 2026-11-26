@@ -1,0 +1,45 @@
+add_newline = true
+
+format = """
+[╭─](#6c7086)$username[@](#6c7086)$hostname $directory$git_branch$git_status$nix_shell$cmd_duration
+[╰─](#6c7086)$character"""
+
+[username]
+show_always = true
+style_user = "bold #E6E6E6"
+style_root = "bold #6E6E6E"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "bold #A8A8A8"
+format = "[$hostname]($style)"
+
+[directory]
+style = "bold #FFFFFF"
+truncation_length = 3
+truncation_symbol = "…/"
+format = "[\uf07c $path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+symbol = "\ue0a0 "
+style = "bold #CCCCCC"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+style = "#B4B4B4"
+format = '([$all_status$ahead_behind]($style) )'
+
+[nix_shell]
+symbol = "\uf313 "
+style = "bold #999999"
+format = '[$symbol$state]($style) '
+
+[cmd_duration]
+min_time = 2000
+style = "#8C8C8C"
+format = "[⏱ $duration]($style) "
+
+[character]
+success_symbol = "[❯](bold #CCCCCC)"
+error_symbol = "[❯](bold #6E6E6E)"

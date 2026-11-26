@@ -14,16 +14,6 @@
           size = 12;
         };
 
-        # Mientras zsh NO lo gestione Home Manager, se deja que kitty inyecte
-        # su integración de shell como hasta ahora. Cuando pases zsh a HM,
-        # borra estas cuatro líneas.
-        shellIntegration = {
-          mode = null;
-          enableBashIntegration = false;
-          enableZshIntegration = false;
-          enableFishIntegration = false;
-        };
-
         settings = {
           shell = "zsh";
 
