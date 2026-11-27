@@ -9,7 +9,9 @@
 
       # Paquetes solo para tu usuario (de momento vacío; los de sistema
       # siguen en modules/apps/*.nix como hasta ahora)
-      home.packages = with pkgs; [ ];
+      home.packages = with pkgs; [
+        (pkgs.callPackage ./_pkgs/helium.nix {  })
+      ];
 
       # ───────────────────────────────────────────────────────────────
       # Ejemplos para más adelante (están comentados a propósito).
